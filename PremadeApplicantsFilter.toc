@@ -1,0 +1,23 @@
+## Interface: 80300
+## Title: Premade Applicants Filter
+## Version: 0.1
+## Notes: Allows filtering of premade applicants using advanced filter expressions.
+## Author: Elotheon-Arthas-EU
+## SavedVariables:
+## SavedVariablesPerCharacter: PremadeApplicantsFilterState
+## License: GPL-3.0-or-later
+
+Init.lua
+Localization\enUS.lua
+Localization\frFR.lua
+Localization\deDE.lua
+Localization\koKR.lua
+Localization\zhCN.lua
+Localization\zhTW.lua
+Localization\ruRU.lua
+Localization\esES.lua
+Modules\Util.lua
+Modules\Expression.lua
+Plugins\PremadeRegions.lua
+Plugins\RaiderIO.lua
+Main.lua
