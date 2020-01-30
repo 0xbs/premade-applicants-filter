@@ -48,13 +48,13 @@ function PAF.DoFilterSearchResults(applicants)
         -- Fields in applicantInfo:
         -- applicationStatus, pendingApplicationStatus, numMembers, isNew, comment, displayOrderID
         if applicantInfo.pendingApplicationStatus or applicantInfo.applicationStatus == "applied" then
-            local env = {}
-            env.members = applicantInfo.numMembers
 
             for memberIdx = 1, applicantInfo.numMembers do
                 local name, class, localizedClass, level, itemLevel, honorLevel, tank, healer, damage,
                 assignedRole, relationship = C_LFGList.GetApplicantMemberInfo(applicantID, memberIdx)
 
+                local env = {}
+                env.members = applicantInfo.numMembers
                 env.level = level
                 env.ilvl = itemLevel
                 env.myilvl = select(2, GetAverageItemLevel())
@@ -67,9 +67,11 @@ function PAF.DoFilterSearchResults(applicants)
                 env.heal = healer
                 env.damage = damage
                 env.dps = damage
-                env[class:lower()] = true
-                env.range = C.DPS_CLASS_TYPE[class].range
-                env.melee = C.DPS_CLASS_TYPE[class].melee
+                env.range = C.DPS_CLASS_TYPE[class:upper()].range
+                env.melee = C.DPS_CLASS_TYPE[class:upper()].melee
+                for someClass, _ in pairs(C.DPS_CLASS_TYPE) do
+                    env[someClass:lower()] = someClass == class:upper()
+                end
                 PAF.PutRaiderIOMetrics(env, name)
                 PAF.PutPremadeRegionInfo(env, name)
 
