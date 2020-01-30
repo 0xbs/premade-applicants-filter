@@ -17,7 +17,7 @@ Premade Applicants Filter helps you limit the visible applicants of the LFG Prem
 | `guild`        | boolean | If applicant is in your guild |
 | `tank`         | boolean | If applicant would like to play tank |
 | `healer`       | boolean | If applicant would like to play heal |
-| `heal`         | boolean | Synonym for `heal` |
+| `heal`         | boolean | Synonym for `healer` |
 | `damage`       | boolean | If applicant would like to play damage dealer |
 | `dps`          | boolean | Synonym for `damage` |
 | `range`        | boolean | If applicant's class can be a ranged class |
