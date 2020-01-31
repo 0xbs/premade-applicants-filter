@@ -35,8 +35,12 @@ C.DPS_CLASS_TYPE = {
     ["WARRIOR"]     = { range = false, melee = true },
 }
 
+function PAF.GetModel()
+    return PremadeGroupsFilterState
+end
+
 function PAF.DoFilterSearchResults(applicants)
-    local model = PremadeGroupsFilterState
+    local model = PAF.GetModel()
     local exp = model.expression
     if not model or not model.enabled then return false end
     if not applicants or #applicants == 0 then return false end

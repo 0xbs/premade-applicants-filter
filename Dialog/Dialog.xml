@@ -1,0 +1,94 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+    <Button name="PremadeApplicantsFilterInfoButtonTemplate" virtual="true">
+        <Size x="64" y="64"/>
+        <HitRectInsets>
+            <AbsInset left="20" right="20" top="20" bottom="20"/>
+        </HitRectInsets>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture parentKey="I" file="Interface\common\help-i">
+                    <Size x="46" y="46"/>
+                    <Anchors>
+                        <Anchor point="CENTER"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+        </Layers>
+    </Button>
+
+    <Frame name="PremadeApplicantsFilterDialog" frameStrata="MEDIUM" parent="PVEFrame" clampedToScreen="true" enableMouse="true" inherits="BasicFrameTemplateWithInset" hidden="true">
+        <Size x="300" y="430"/>
+        <Anchors>
+            <Anchor point="TOPLEFT"/>
+        </Anchors>
+        <Layers>
+            <Layer level="OVERLAY">
+                <!-- the text in the title bar -->
+                <FontString parentKey="Title" inherits="GameFontNormal" wordwrap="false">
+                    <Anchors>
+                        <Anchor point="LEFT" x="10"/>
+                        <Anchor point="RIGHT" x="-10"/>
+                        <Anchor point="TOP" y="-5"/>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Frame parentKey="Advanced" inherits="HorizontalBarTemplate">
+                <Size x="0" y="35"/>
+                <Anchors>
+                    <Anchor point="LEFT" x="1"/>
+                    <Anchor point="RIGHT" x="-3"/>
+                    <Anchor point="BOTTOM" y="108"/>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <!-- text explaining the advanced expression filter -->
+                        <FontString parentKey="Explanation" inherits="GameFontNormal"  justifyH="LEFT">
+                            <Size y="50"/>
+                            <Anchors>
+                                <Anchor point="LEFT" x="8"/>
+                                <Anchor point="RIGHT" x="-35"/>
+                                <Anchor point="TOP" y="8"/>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Frames>
+                    <Button parentKey="InfoButton" inherits="PremadeApplicantsFilterInfoButtonTemplate">
+                        <Anchors>
+                            <Anchor point="TOPRIGHT" x="15" y="14"/>
+                        </Anchors>
+                    </Button>
+                </Frames>
+            </Frame>
+            <ScrollFrame parentKey="Expression" inherits="InputScrollFrameTemplate">
+                <Size y="70"/>
+                <Anchors>
+                    <Anchor point="LEFT" x="11"/>
+                    <Anchor point="RIGHT" x="-13"/>
+                    <Anchor point="BOTTOM" y="32"/>
+                </Anchors>
+                <KeyValues>
+                    <KeyValue key="maxLetters" value="2000" type="number"/>
+                    <!--<KeyValue key="instructions" value="" type="global"/>-->
+                    <KeyValue key="hideCharCount" value="true" type="boolean"/>
+                </KeyValues>
+                <Scripts>
+                    <OnLoad>InputScrollFrame_OnLoad(self)</OnLoad>
+                </Scripts>
+            </ScrollFrame>
+            <Button parentKey="RefreshButton" inherits="MagicButtonTemplate">
+                <Size x="135" y="22"/>
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT" x="-3" y="4"/>
+                </Anchors>
+            </Button>
+        </Frames>
+        <Scripts>
+            <OnLoad>PremadeApplicantsFilter.Dialog_OnLoad(self)</OnLoad>
+        </Scripts>
+    </Frame>
+</Ui>

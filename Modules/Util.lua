@@ -30,3 +30,6 @@ function PAF.Table_UpdateWithDefaults(table, defaults)
         end
     end
 end
+
+function PAF.NotEmpty(value) return value and value ~= "" end
+function PAF.Empty(value) return not PGF.NotEmpty(value) end
