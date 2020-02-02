@@ -20,6 +20,8 @@ local PAF = select(2, ...)
 local L = PAF.L
 local C = PAF.C
 
+C.FONTSIZE_TEXTBOX = 12
+
 -------------------------------------------------------------------------------
 -- OnShow functions
 -------------------------------------------------------------------------------
@@ -27,7 +29,6 @@ local C = PAF.C
 function PAF.Dialog_LoadFromModel(dialog)
     local model = PAF.GetModel()
     PAF.UsePAFButton:SetChecked(model.enabled)
-    PAF.previousSearchExpression = model.expression
     dialog.Expression.EditBox:SetText(model.expression)
 end
 
@@ -54,7 +55,7 @@ function PAF.Dialog_SetUpUsePAFCheckbox()
     button.text:SetText("PAF")
     button.text:SetFontObject("GameFontHighlight")
     button.text:SetWidth(30)
-    button:SetPoint("LEFT", LFGListFrame.SearchPanel.RefreshButton, "LEFT", -62, 0)
+    button:SetPoint("LEFT", LFGListFrame.SearchPanel.RefreshButton, "LEFT", -162, 0)
     button:SetPoint("TOP", LFGListFrame.SearchPanel.RefreshButton, "TOP", 0, -3)
     button:SetScript("OnClick", PAF.Dialog_UsePAF_OnClick)
     button:SetScript("OnEnter", function (self)
@@ -80,7 +81,7 @@ function PAF.Dialog_OnLoad()
 
     PAF.Dialog_SetUpUsePAFCheckbox()
 
-    local font = dialog.SimpleExplanation:GetFont()
+    local font = dialog.Title:GetFont()
     dialog.Expression.EditBox:SetFont(font, C.FONTSIZE_TEXTBOX)
     dialog.Expression.EditBox.Instructions:SetFont(font, C.FONTSIZE_TEXTBOX)
     --dialog.Expression.EditBox:SetScript("OnTextChanged", PAF.Dialog_Expression_OnTextChanged) -- overrides Blizz
@@ -98,9 +99,9 @@ function PAF.Dialog_ClearFocus()
 end
 
 function PAF.Dialog_OnModelUpdate()
-    local exp = PAF.GetExpressionFromModel()
+    local model = PAF.GetModel()
+    local exp = model.expression
     if PAF.Empty(exp) or exp == "true" then exp = "" end
-    exp = exp:gsub("^true and ", "")
     PremadeApplicantsFilterDialog.Expression.EditBox.Instructions:SetText(exp)
 end
 
@@ -114,7 +115,8 @@ function PAF.Dialog_UsePAF_OnClick(self, button, down)
         PAF.Dialog_ClearFocus()
         PremadeApplicantsFilterDialog:Hide()
     end
-    LFGListApplicationViewer_UpdateResultList(LFGListFrame.ApplicationViewer)
+    -- TODO re-enable once we have the right panel
+    --LFGListApplicationViewer_UpdateResultList(LFGListFrame.ApplicationViewer)
 end
 
 function PAF.Dialog_Expression_OnTextChanged(self, userInput)
@@ -150,13 +152,13 @@ end
 local buttonHooksInitialized = false
 function PAF.OnLFGListFrameSetActivePanel(self, panel)
     PAF.Dialog_Toggle()
-    if not buttonHooksInitialized and panel == self.SearchPanel then
-        buttonHooksInitialized = true
-        local buttons = self.SearchPanel.ScrollFrame.buttons
-        for i = 1, #buttons do
-            buttons[i]:HookScript("OnEnter", PAF.OnLFGListSearchEntryOnEnter)
-        end
-    end
+    --if not buttonHooksInitialized and panel == self.SearchPanel then
+    --    buttonHooksInitialized = true
+    --    local buttons = self.SearchPanel.ScrollFrame.buttons
+    --    for i = 1, #buttons do
+    --        buttons[i]:HookScript("OnEnter", PAF.OnLFGListSearchEntryOnEnter)
+    --    end
+    --end
 end
 
 hooksecurefunc("LFGListFrame_SetActivePanel", PAF.OnLFGListFrameSetActivePanel)

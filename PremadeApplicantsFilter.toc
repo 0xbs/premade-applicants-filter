@@ -20,8 +20,7 @@ Modules\Util.lua
 Modules\Expression.lua
 Plugins\PremadeRegions.lua
 Plugins\RaiderIO.lua
+Main.lua
 Dialog\HelpTooltip.lua
-Dialog\Setup.lua
 Dialog\Dialog.lua
 Dialog\Dialog.xml
-Main.lua

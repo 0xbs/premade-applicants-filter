@@ -36,7 +36,7 @@ C.DPS_CLASS_TYPE = {
 }
 
 function PAF.GetModel()
-    return PremadeGroupsFilterState
+    return PremadeApplicantsFilterState
 end
 
 function PAF.DoFilterSearchResults(applicants)
