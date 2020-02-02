@@ -87,13 +87,6 @@ function PAF.Dialog_ClearFocus()
     dialog.Expression.EditBox:ClearFocus()
 end
 
-function PAF.Dialog_OnModelUpdate()
-    local model = PAF.GetModel()
-    local exp = model.expression
-    if PAF.Empty(exp) or exp == "true" then exp = "" end
-    PremadeApplicantsFilterDialog.Expression.EditBox.Instructions:SetText(exp)
-end
-
 function PAF.Dialog_UsePAF_OnClick(self, button, down)
     local checked = self:GetChecked()
     local model = PAF.GetModel()
@@ -113,7 +106,6 @@ function PAF.Dialog_Expression_OnTextChanged(self, userInput)
     if self == PremadeApplicantsFilterDialog.Expression.EditBox then
         local model = PAF.GetModel()
         model.expression = self:GetText() or ""
-        PAF.Dialog_OnModelUpdate()
     end
 end
 
