@@ -22,32 +22,6 @@ local C = PAF.C
 
 C.FONTSIZE_TEXTBOX = 12
 
--------------------------------------------------------------------------------
--- OnShow functions
--------------------------------------------------------------------------------
-
-function PAF.Dialog_LoadFromModel(dialog)
-    local model = PAF.GetModel()
-    PAF.UsePAFButton:SetChecked(model.enabled)
-    dialog.Expression.EditBox:SetText(model.expression)
-end
-
-function PAF.Dialog_UpdatePosition()
-    local dialog = PremadeApplicantsFilterDialog
-    dialog:SetPoint("TOPLEFT", GroupFinderFrame, "TOPRIGHT")
-    --dialog:SetPoint("BOTTOMLEFT", GroupFinderFrame, "BOTTOMRIGHT")
-    dialog:SetWidth(300)
-end
-
-function PAF.Dialog_OnShow(dialog)
-    PAF.Dialog_LoadFromModel(dialog)
-    PAF.Dialog_UpdatePosition(dialog)
-end
-
--------------------------------------------------------------------------------
--- OnLoad functions
--------------------------------------------------------------------------------
-
 function PAF.Dialog_SetUpUsePAFCheckbox()
     local button = CreateFrame("CheckButton", "UsePAFButton", LFGListFrame.ApplicationViewer, "UICheckButtonTemplate")
     button:SetSize(26, 26)
@@ -68,7 +42,6 @@ end
 
 function PAF.Dialog_OnLoad()
     local dialog = PremadeApplicantsFilterDialog -- keep that
-    dialog:SetScript("OnShow", PAF.Dialog_OnShow)
 
     dialog.InsetBg:SetPoint("TOPLEFT", 4, -60)
     dialog.InsetBg:SetPoint("BOTTOMRIGHT", -6, 6)
@@ -84,13 +57,30 @@ function PAF.Dialog_OnLoad()
     dialog.Expression.EditBox:SetFont(font, C.FONTSIZE_TEXTBOX)
     dialog.Expression.EditBox.Instructions:SetFont(font, C.FONTSIZE_TEXTBOX)
     --dialog.Expression.EditBox:SetScript("OnTextChanged", PAF.Dialog_Expression_OnTextChanged) -- overrides Blizz
+
+    dialog:ClearAllPoints()
+    dialog:SetPoint("TOPLEFT", GroupFinderFrame, "TOPRIGHT")
+    dialog:SetWidth(300)
+end
+
+function PAF.Dialog_OnShow()
+    local model = PAF.GetModel()
+    PAF.UsePAFButton:SetChecked(model.enabled)
+    PremadeApplicantsFilterDialog.Expression.EditBox:SetText(model.expression)
+end
+
+function PAF.Dialog_OnMouseDown()
+    PremadeApplicantsFilterDialog:StartMoving()
+end
+
+function PAF.Dialog_OnMouseUp()
+    PremadeApplicantsFilterDialog:StopMovingOrSizing()
 end
 
 PremadeApplicantsFilter.Dialog_OnLoad = PAF.Dialog_OnLoad
-
--------------------------------------------------------------------------------
--- Interaction functions
--------------------------------------------------------------------------------
+PremadeApplicantsFilter.Dialog_OnShow = PAF.Dialog_OnShow
+PremadeApplicantsFilter.Dialog_OnMouseDown = PAF.Dialog_OnMouseDown
+PremadeApplicantsFilter.Dialog_OnMouseUp = PAF.Dialog_OnMouseUp
 
 function PAF.Dialog_ClearFocus()
     local dialog = PremadeApplicantsFilterDialog

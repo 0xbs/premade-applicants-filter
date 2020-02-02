@@ -18,7 +18,7 @@
         </Layers>
     </Button>
 
-    <Frame name="PremadeApplicantsFilterDialog" frameStrata="MEDIUM" parent="PVEFrame" clampedToScreen="true" enableMouse="true" inherits="BasicFrameTemplateWithInset" hidden="true">
+    <Frame name="PremadeApplicantsFilterDialog" frameStrata="FULLSCREEN" parent="PVEFrame" movable="true" clampedToScreen="true" enableMouse="true" inherits="BasicFrameTemplateWithInset" hidden="true">
         <Size x="300" y="200"/>
         <Anchors>
             <Anchor point="TOPLEFT"/>
@@ -72,6 +72,9 @@
         </Frames>
         <Scripts>
             <OnLoad>PremadeApplicantsFilter.Dialog_OnLoad(self)</OnLoad>
+            <OnShow>PremadeApplicantsFilter.Dialog_OnShow(self)</OnShow>
+            <OnMouseDown>PremadeApplicantsFilter.Dialog_OnMouseDown(self,button)</OnMouseDown>
+            <OnMouseUp>PremadeApplicantsFilter.Dialog_OnMouseUp(self,button)</OnMouseUp>
         </Scripts>
     </Frame>
 </Ui>
