@@ -49,14 +49,14 @@ end
 -------------------------------------------------------------------------------
 
 function PAF.Dialog_SetUpUsePAFCheckbox()
-    local button = CreateFrame("CheckButton", "UsePAFButton", LFGListFrame.SearchPanel, "UICheckButtonTemplate")
+    local button = CreateFrame("CheckButton", "UsePAFButton", LFGListFrame.ApplicationViewer, "UICheckButtonTemplate")
     button:SetSize(26, 26)
     button:SetHitRectInsets(-2, -30, -2, -2)
     button.text:SetText("PAF")
     button.text:SetFontObject("GameFontHighlight")
     button.text:SetWidth(30)
-    button:SetPoint("LEFT", LFGListFrame.SearchPanel.RefreshButton, "LEFT", -162, 0)
-    button:SetPoint("TOP", LFGListFrame.SearchPanel.RefreshButton, "TOP", 0, -3)
+    button:SetPoint("LEFT", LFGListFrame.ApplicationViewer.RefreshButton, "LEFT", -62, 0)
+    button:SetPoint("TOP", LFGListFrame.ApplicationViewer.RefreshButton, "TOP", 0, -3)
     button:SetScript("OnClick", PAF.Dialog_UsePAF_OnClick)
     button:SetScript("OnEnter", function (self)
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
@@ -114,8 +114,7 @@ function PAF.Dialog_UsePAF_OnClick(self, button, down)
         PAF.Dialog_ClearFocus()
         PremadeApplicantsFilterDialog:Hide()
     end
-    -- TODO re-enable once we have the right panel
-    --LFGListApplicationViewer_UpdateResultList(LFGListFrame.ApplicationViewer)
+    C_LFGList.RefreshApplicants();
 end
 
 function PAF.Dialog_Expression_OnTextChanged(self, userInput)
@@ -131,8 +130,8 @@ end
 function PAF.Dialog_Toggle()
     local dialog = PremadeApplicantsFilterDialog
     local model = PAF.GetModel()
-    if PVEFrame:IsVisible() and LFGListFrame.activePanel == LFGListFrame.SearchPanel
-            and LFGListFrame.SearchPanel:IsVisible() and model then
+    if PVEFrame:IsVisible() and LFGListFrame.activePanel == LFGListFrame.ApplicationViewer
+            and LFGListFrame.ApplicationViewer:IsVisible() and model then
         PAF.UsePAFButton:SetChecked(model.enabled)
         if model.enabled then
             dialog:Show()
@@ -142,13 +141,10 @@ function PAF.Dialog_Toggle()
     end
 end
 
-function PAF.OnLFGListFrameSetActivePanel(self, panel)
-    PAF.Dialog_Toggle()
-end
-
-hooksecurefunc("LFGListFrame_SetActivePanel", PAF.OnLFGListFrameSetActivePanel)
+hooksecurefunc("InputScrollFrame_OnTextChanged", PAF.Dialog_Expression_OnTextChanged)
+hooksecurefunc("LFGListFrame_SetActivePanel", PAF.Dialog_Toggle)
+hooksecurefunc("LFGListApplicationViewer_OnShow", PAF.Dialog_Toggle)
 hooksecurefunc("GroupFinderFrame_ShowGroupFrame", PAF.Dialog_Toggle)
 hooksecurefunc("PVEFrame_ShowFrame", PAF.Dialog_Toggle)
-hooksecurefunc("InputScrollFrame_OnTextChanged", PAF.Dialog_Expression_OnTextChanged)
 PVEFrame:SetScript("OnShow", PAF.Dialog_Toggle)
 PVEFrame:SetScript("OnHide", PAF.Dialog_Toggle)

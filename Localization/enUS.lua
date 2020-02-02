@@ -24,7 +24,7 @@ L["button.ok"] = "OK"
 L["error.syntax"] = "|cffff0000Syntax error in filter expression|r\n\nThis means your filter expression is not built in the right way, e.g. there is a paranthesis missing or you wrote 'tanks=1' instead of 'tanks==1'.\n\nDetailed error message:\n|cffaaaaaa%s|r"
 L["error.semantic"] = "|cffff0000Semantic error in filter expression|r\n\nThis means your filter expression has correct syntax, but you most likely mispelled the name of a variable, e.g. tansk instead of tanks.\n\nDetailed error message:\n|cffaaaaaa%s|r"
 
-L["dialog.usepaf.tooltip"] = "PAF"
+L["dialog.usepaf.tooltip"] = "Enable or disable Premade Applicants Filter"
 L["dialog.explanation"] = "Enter a filter expression to show only matching applicants:"
 L["dialog.tooltip.title"] = "Filter Expressions"
 L["dialog.tooltip.examples"] = "Examples"
