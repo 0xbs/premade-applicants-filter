@@ -35,7 +35,7 @@ end
 function PAF.Dialog_UpdatePosition()
     local dialog = PremadeApplicantsFilterDialog
     dialog:SetPoint("TOPLEFT", GroupFinderFrame, "TOPRIGHT")
-    dialog:SetPoint("BOTTOMLEFT", GroupFinderFrame, "BOTTOMRIGHT")
+    --dialog:SetPoint("BOTTOMLEFT", GroupFinderFrame, "BOTTOMRIGHT")
     dialog:SetWidth(300)
 end
 
@@ -70,14 +70,13 @@ function PAF.Dialog_OnLoad()
     local dialog = PremadeApplicantsFilterDialog -- keep that
     dialog:SetScript("OnShow", PAF.Dialog_OnShow)
 
-    dialog.InsetBg:SetPoint("TOPLEFT", 4, -62)
-    dialog.InsetBg:SetPoint("BOTTOMRIGHT", -6, 26)
+    dialog.InsetBg:SetPoint("TOPLEFT", 4, -60)
+    dialog.InsetBg:SetPoint("BOTTOMRIGHT", -6, 6)
     dialog.Title:SetText("Premade Applicants Filter")
-    dialog.RefreshButton:SetScript("OnClick", PAF.Dialog_RefreshButton_OnClick)
-    dialog.Advanced.Explanation:SetText(L["dialog.explanation"])
-    dialog.Advanced.InfoButton:EnableMouse(true)
-    dialog.Advanced.InfoButton:SetScript("OnEnter", PAF.Dialog_InfoButton_OnEnter)
-    dialog.Advanced.InfoButton:SetScript("OnLeave", PAF.Dialog_InfoButton_OnLeave)
+    dialog.Explanation:SetText(L["dialog.explanation"])
+    dialog.InfoButton:EnableMouse(true)
+    dialog.InfoButton:SetScript("OnEnter", PAF.Dialog_InfoButton_OnEnter)
+    dialog.InfoButton:SetScript("OnLeave", PAF.Dialog_InfoButton_OnLeave)
 
     PAF.Dialog_SetUpUsePAFCheckbox()
 
@@ -129,12 +128,6 @@ function PAF.Dialog_Expression_OnTextChanged(self, userInput)
     end
 end
 
-function PAF.Dialog_RefreshButton_OnClick(self, button, down)
-    PAF.Dialog_ClearFocus()
-    PAF.Dialog_Expression_OnTextChanged(PremadeApplicantsFilterDialog.Expression.EditBox)
-    LFGListApplicationViewer_UpdateResultList(LFGListFrame.ApplicationViewer)
-end
-
 function PAF.Dialog_Toggle()
     local dialog = PremadeApplicantsFilterDialog
     local model = PAF.GetModel()
@@ -149,16 +142,8 @@ function PAF.Dialog_Toggle()
     end
 end
 
-local buttonHooksInitialized = false
 function PAF.OnLFGListFrameSetActivePanel(self, panel)
     PAF.Dialog_Toggle()
-    --if not buttonHooksInitialized and panel == self.SearchPanel then
-    --    buttonHooksInitialized = true
-    --    local buttons = self.SearchPanel.ScrollFrame.buttons
-    --    for i = 1, #buttons do
-    --        buttons[i]:HookScript("OnEnter", PAF.OnLFGListSearchEntryOnEnter)
-    --    end
-    --end
 end
 
 hooksecurefunc("LFGListFrame_SetActivePanel", PAF.OnLFGListFrameSetActivePanel)

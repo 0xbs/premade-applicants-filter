@@ -19,7 +19,7 @@
     </Button>
 
     <Frame name="PremadeApplicantsFilterDialog" frameStrata="MEDIUM" parent="PVEFrame" clampedToScreen="true" enableMouse="true" inherits="BasicFrameTemplateWithInset" hidden="true">
-        <Size x="300" y="430"/>
+        <Size x="300" y="200"/>
         <Anchors>
             <Anchor point="TOPLEFT"/>
         </Anchors>
@@ -34,42 +34,31 @@
                     </Anchors>
                 </FontString>
             </Layer>
+            <Layer>
+                <!-- text explaining the advanced expression filter -->
+                <FontString parentKey="Explanation" inherits="GameFontNormal"  justifyH="LEFT">
+                    <Size y="50"/>
+                    <Anchors>
+                        <Anchor point="LEFT" x="10"/>
+                        <Anchor point="RIGHT" x="-35"/>
+                        <Anchor point="TOP" y="-17"/>
+                    </Anchors>
+                </FontString>
+            </Layer>
         </Layers>
         <Frames>
-            <Frame parentKey="Advanced" inherits="HorizontalBarTemplate">
-                <Size x="0" y="35"/>
+            <Button parentKey="InfoButton" inherits="PremadeApplicantsFilterInfoButtonTemplate">
                 <Anchors>
-                    <Anchor point="LEFT" x="1"/>
-                    <Anchor point="RIGHT" x="-3"/>
-                    <Anchor point="BOTTOM" y="108"/>
+                    <Anchor point="RIGHT" x="8"/>
+                    <Anchor point="TOP" y="-10"/>
                 </Anchors>
-                <Layers>
-                    <Layer>
-                        <!-- text explaining the advanced expression filter -->
-                        <FontString parentKey="Explanation" inherits="GameFontNormal"  justifyH="LEFT">
-                            <Size y="50"/>
-                            <Anchors>
-                                <Anchor point="LEFT" x="8"/>
-                                <Anchor point="RIGHT" x="-35"/>
-                                <Anchor point="TOP" y="8"/>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-                <Frames>
-                    <Button parentKey="InfoButton" inherits="PremadeApplicantsFilterInfoButtonTemplate">
-                        <Anchors>
-                            <Anchor point="TOPRIGHT" x="15" y="14"/>
-                        </Anchors>
-                    </Button>
-                </Frames>
-            </Frame>
+            </Button>
             <ScrollFrame parentKey="Expression" inherits="InputScrollFrameTemplate">
-                <Size y="70"/>
                 <Anchors>
                     <Anchor point="LEFT" x="11"/>
                     <Anchor point="RIGHT" x="-13"/>
-                    <Anchor point="BOTTOM" y="32"/>
+                    <Anchor point="TOP" y="-65"/>
+                    <Anchor point="BOTTOM" y="12"/>
                 </Anchors>
                 <KeyValues>
                     <KeyValue key="maxLetters" value="2000" type="number"/>
@@ -80,12 +69,6 @@
                     <OnLoad>InputScrollFrame_OnLoad(self)</OnLoad>
                 </Scripts>
             </ScrollFrame>
-            <Button parentKey="RefreshButton" inherits="MagicButtonTemplate">
-                <Size x="135" y="22"/>
-                <Anchors>
-                    <Anchor point="BOTTOMRIGHT" x="-3" y="4"/>
-                </Anchors>
-            </Button>
         </Frames>
         <Scripts>
             <OnLoad>PremadeApplicantsFilter.Dialog_OnLoad(self)</OnLoad>
