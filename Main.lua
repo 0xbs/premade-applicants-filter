@@ -44,6 +44,7 @@ function PAF.DoFilterSearchResults(applicants)
     local exp = model.expression
     if not model or not model.enabled then return false end
     if not applicants or #applicants == 0 then return false end
+    exp = PAF.TrimWhitespace(exp)
     if not exp or exp == "" then return false end -- skip trivial expression
 
     for idx = #applicants, 1, -1 do

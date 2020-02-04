@@ -33,3 +33,10 @@ end
 
 function PAF.NotEmpty(value) return value and value ~= "" end
 function PAF.Empty(value) return not PAF.NotEmpty(value) end
+
+function PAF.TrimWhitespace(value)
+    local result = value
+    result = result:gsub("^%s+", "")
+    result = result:gsub("%s+$", "")
+    return result
+end
