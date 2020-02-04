@@ -1,6 +1,12 @@
 # Premade Applicants Filter
 
-Premade Applicants Filter helps you limit the visible applicants of the LFG Premade Groups tool.
+Premade Applicants Filter helps you limit the visible applicants of the LFG
+Premade Groups tool. When creating a premade group for a popular activity such
+as the latest raid or a high mythic plus dungeon, group leaders find themselves
+with a lot of applicants. Those applicants have to be checked manually for
+role, class, item level and other external metrics such as a Raider.IO rating.
+Premade Applicants Filter aims to help group leaders by filtering out
+applicants that do not match the required criteria.
 
 ### Keywords
 
