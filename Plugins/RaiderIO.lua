@@ -54,15 +54,15 @@ function PAF.PutRaiderIOMetrics(env, playerName)
                 if data and data.dataType == RaiderIO.DataProvider.MYTHICPLUS and data.profile then
                     env.hasrio       = true
                     env.norio        = false
-                    env.rio          = data.profile.mplusCurrent.score
-                    env.rioprev      = data.profile.mplusPrevious.score
-                    env.riomain      = data.profile.mplusMainCurrent.score
-                    env.riomainprev  = data.profile.mplusMainPrevious.score
-                    env.riokey5plus  = data.profile.keystoneFivePlus
-                    env.riokey10plus = data.profile.keystoneTenPlus
-                    env.riokey15plus = data.profile.keystoneFifteenPlus
-                    env.riokey20plus = data.profile.keystoneTwentyPlus
-                    env.riokeymax    = data.profile.maxDungeonLevel
+                    env.rio          = data.profile.mplusCurrent.score or 0
+                    env.rioprev      = data.profile.mplusPrevious.score or 0
+                    env.riomain      = data.profile.mplusMainCurrent.score or 0
+                    env.riomainprev  = data.profile.mplusMainPrevious.score or 0
+                    env.riokey5plus  = data.profile.keystoneFivePlus or 0
+                    env.riokey10plus = data.profile.keystoneTenPlus or 0
+                    env.riokey15plus = data.profile.keystoneFifteenPlus or 0
+                    env.riokey20plus = data.profile.keystoneTwentyPlus or 0
+                    env.riokeymax    = data.profile.maxDungeonLevel or 0
                 end
                 if data and data.dataType == RaiderIO.DataProvider.RAIDING and data.profile then
                     if data.profile.currentRaid then
