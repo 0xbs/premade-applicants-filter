@@ -48,19 +48,18 @@ function PAF.DoFilterSearchResults(applicants)
     if not exp or exp == "" then return false end -- skip trivial expression
 
     for idx = #applicants, 1, -1 do
-        local applicantDoesPass = true
         local applicantID = applicants[idx]
         local applicantInfo = C_LFGList.GetApplicantInfo(applicantID);
         -- Fields in applicantInfo:
         -- applicationStatus, pendingApplicationStatus, numMembers, isNew, comment, displayOrderID
         if applicantInfo.pendingApplicationStatus or applicantInfo.applicationStatus == "applied" then
 
+            local memberEnvs = {}
             for memberIdx = 1, applicantInfo.numMembers do
                 local name, class, localizedClass, level, itemLevel, honorLevel, tank, healer, damage,
                 assignedRole, relationship = C_LFGList.GetApplicantMemberInfo(applicantID, memberIdx)
 
                 local env = {}
-                env.members = applicantInfo.numMembers
                 env.level = level
                 env.ilvl = itemLevel
                 env.myilvl = select(2, GetAverageItemLevel())
@@ -81,13 +80,45 @@ function PAF.DoFilterSearchResults(applicants)
                 PAF.PutRaiderIOMetrics(env, name)
                 PAF.PutPremadeRegionInfo(env, name)
 
-                -- check each applicant member individually
-                applicantDoesPass = applicantDoesPass and PAF.DoesPassThroughFilter(env, exp)
+                memberEnvs[memberIdx] = env
             end
-        end
 
-        if not applicantDoesPass then
-            table.remove(applicants, idx)
+            local applicantEnv = {}
+            applicantEnv.members = applicantInfo.numMembers
+            applicantEnv.some = function (subexp)
+                for _, subenv in pairs(memberEnvs) do
+                    local status, result = eval(subexp, subenv)
+                    if status == 0 then
+                        if result then return true end
+                    elseif status == 1 then
+                        error("syntax error in 'some(...)': " .. result)
+                    else
+                        error("semantic error in 'some(...)': " .. result)
+                    end
+                end
+                return false
+            end
+            applicantEnv.all = function (subexp)
+                local total = true
+                for _, subenv in pairs(memberEnvs) do
+                    local status, result = eval(subexp, subenv)
+                    if status == 0 then
+                        total = total and result
+                    elseif status == 1 then
+                        error("syntax error in 'all(...)': " .. result)
+                    else
+                        error("semantic error in 'all(...)': " .. result)
+                    end
+                end
+                return total
+            end
+            applicantEnv.every = function (subexp) return env.all(subexp) end
+            applicantEnv.exists = function (subexp) return env.some(subexp) end
+            applicantEnv.none = function (subexp) return not env.some(subexp) end
+            if not PAF.DoesPassThroughFilter(applicantEnv, exp) then
+                table.remove(applicants, idx)
+            end
+
         end
     end
 end
