@@ -43,7 +43,7 @@ function PAF.DoesPassThroughFilter(env, exp)
     --local exp = "mythic and tanks==0 and members==4"   -- correct statement
     local func, err = loadstring("return " .. exp)
     if err then
-        PGF.HandleSyntaxError(err)
+        PAF.HandleSyntaxError(err)
         return true -- do not filter in case of error
     end
     setfenv(func, env)
@@ -52,11 +52,11 @@ function PAF.DoesPassThroughFilter(env, exp)
         if type(result) == "boolean" then
             return result -- successful execution
         else
-            PGF.HandleSemanticError("expression did not evaluate to boolean, but to '" .. tostring(result) .. "' of type " .. type(result))
+            PAF.HandleSemanticError("expression did not evaluate to boolean, but to '" .. tostring(result) .. "' of type " .. type(result))
             return true -- do not filter in case of error
         end
     else
-        PGF.HandleSemanticError(result)
+        PAF.HandleSemanticError(result)
         return true -- do not filter in case of error
     end
 end
