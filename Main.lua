@@ -87,13 +87,8 @@ function PAF.DoFilterSearchResults(applicants)
             applicantEnv.members = applicantInfo.numMembers
             applicantEnv.some = function (subexp)
                 for _, subenv in pairs(memberEnvs) do
-                    local status, result = eval(subexp, subenv)
-                    if status == 0 then
-                        if result then return true end
-                    elseif status == 1 then
-                        error("syntax error in 'some(...)': " .. result)
-                    else
-                        error("semantic error in 'some(...)': " .. result)
+                    if PAF.DoesPassThroughFilter(subenv, subexp) then
+                        return true
                     end
                 end
                 return false
@@ -101,14 +96,8 @@ function PAF.DoFilterSearchResults(applicants)
             applicantEnv.all = function (subexp)
                 local total = true
                 for _, subenv in pairs(memberEnvs) do
-                    local status, result = eval(subexp, subenv)
-                    if status == 0 then
-                        total = total and result
-                    elseif status == 1 then
-                        error("syntax error in 'all(...)': " .. result)
-                    else
-                        error("semantic error in 'all(...)': " .. result)
-                    end
+                    local result = PAF.DoesPassThroughFilter(subenv, subexp)
+                    total = total and result
                 end
                 return total
             end
