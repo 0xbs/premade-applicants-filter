@@ -1,6 +1,6 @@
-## Interface: 80300
+## Interface: 90001
 ## Title: Premade Applicants Filter
-## Version: 0.4
+## Version: 1.0.0
 ## Notes: Allows filtering of premade applicants using advanced filter expressions.
 ## Author: Elotheon-Arthas-EU
 ## SavedVariables:
