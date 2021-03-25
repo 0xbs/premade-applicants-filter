@@ -85,13 +85,11 @@ This keyword must not be quantified (all other keywords require a quantifier).
 | Keyword        | Type    | Description |
 |----------------|---------|-------------|
 | `region`       | string  | region name of the applicant |
-| `oce`          | boolean | if the region of the applicant is Oceanic |
-| `usp`          | boolean | if the region of the applicant is US Pacific |
-| `usm`          | boolean | if the region of the applicant is US Mountain |
-| `usc`          | boolean | if the region of the applicant is US Central |
-| `use`          | boolean | if the region of the applicant is US East |
-| `mex`          | boolean | if the region of the applicant is Mexico |
-| `bzl`          | boolean | if the region of the applicant is Brazil |
+| `oce`          | boolean | if the data center region of the applicant is Sydney |
+| `chi`          | boolean | if the data center region of the applicant is Chicago |
+| `la`           | boolean | if the data center region of the applicant is Los Angeles |
+| `mex`          | boolean | if the data center region of the applicant is Mexico |
+| `bzl`          | boolean | if the data center region of the applicant is Brazil |
 
 #### Provided by Raider.IO
 
