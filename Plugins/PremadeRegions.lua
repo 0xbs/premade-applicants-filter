@@ -23,10 +23,8 @@ local C = PAF.C
 function PAF.PutPremadeRegionInfo(env, playerName)
     env.region = nil
     env.oce = false
-    env.usp = false
-    env.usm = false
-    env.usc = false
-    env.use = false
+    env.la = false
+    env.chi = false
     env.mex = false
     env.bzl = false
     if playerName and PremadeRegions then
