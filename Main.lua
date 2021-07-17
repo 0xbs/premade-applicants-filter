@@ -47,6 +47,9 @@ function PAF.DoFilterSearchResults(applicants)
     exp = PAF.TrimWhitespace(exp)
     if not exp or exp == "" then return false end -- skip trivial expression
 
+    local activeEntryInfo = C_LFGList.GetActiveEntryInfo();
+    if not activeEntryInfo then return end
+
     for idx = #applicants, 1, -1 do
         local applicantID = applicants[idx]
         local applicantInfo = C_LFGList.GetApplicantInfo(applicantID);
@@ -57,7 +60,8 @@ function PAF.DoFilterSearchResults(applicants)
             local memberEnvs = {}
             for memberIdx = 1, applicantInfo.numMembers do
                 local name, class, localizedClass, level, itemLevel, honorLevel, tank, healer, damage,
-                assignedRole, relationship = C_LFGList.GetApplicantMemberInfo(applicantID, memberIdx)
+                assignedRole, relationship, dungeonScore = C_LFGList.GetApplicantMemberInfo(applicantID, memberIdx)
+                local bestDungeonScoreForEntry = C_LFGList.GetApplicantDungeonScoreForListing(applicantID, memberIdx, activeEntryInfo.activityID);
 
                 local env = {}
                 env.level = level
@@ -76,6 +80,13 @@ function PAF.DoFilterSearchResults(applicants)
                 env.melee = C.DPS_CLASS_TYPE[class:upper()].melee
                 for someClass, _ in pairs(C.DPS_CLASS_TYPE) do
                     env[someClass:lower()] = someClass == class:upper()
+                end
+                env.mprating = dungeonScore or 0
+                if bestDungeonScoreForEntry then
+                    env.mpmaprating = bestDungeonScoreForEntry.mapScore
+                    env.mpmapname   = bestDungeonScoreForEntry.mapName
+                    env.mpmapmaxkey = bestDungeonScoreForEntry.bestRunLevel
+                    env.mpmapintime = bestDungeonScoreForEntry.finishedSuccess
                 end
                 PAF.PutRaiderIOMetrics(env, name)
                 PAF.PutPremadeRegionInfo(env, name)
