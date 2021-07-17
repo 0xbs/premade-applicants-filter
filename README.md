@@ -83,11 +83,11 @@ This keyword must not be quantified (all other keywords require a quantifier).
 #### Rating keywords
 | Keyword        | Type    | Description |
 |----------------|---------|-------------|
-| mprating       | integer | overall mythic+ dungeon rating |
-| mpmaprating    | integer | mythic+ rating in current dungeon |
-| mpmapmaxkey    | integer | max key done in current mythic+ dungeon |
-| mpmapintime    | boolean | current mythic+ dungeon completed successfully |
-| mpmapname      | string  | current mythic+ dungeon name |
+| mprating       | integer | overall mythic+ dungeon rating (0 if no rating) |
+| mpmaprating    | integer | mythic+ rating in current dungeon (0 if no rating) |
+| mpmapmaxkey    | integer | max key done in current mythic+ dungeon (0 if no rating) |
+| mpmapintime    | boolean | current mythic+ dungeon completed successfully (false if no rating) |
+| mpmapname      | string  | current mythic+ dungeon name (can be empty if no rating) |
 
 #### Provided by [Premade Regions](https://github.com/0xbs/premade-regions)
 

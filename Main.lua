@@ -82,6 +82,10 @@ function PAF.DoFilterSearchResults(applicants)
                     env[someClass:lower()] = someClass == class:upper()
                 end
                 env.mprating = dungeonScore or 0
+                env.mpmaprating = 0
+                env.mpmapname   = ""
+                env.mpmapmaxkey = 0
+                env.mpmapintime = false
                 if bestDungeonScoreForEntry then
                     env.mpmaprating = bestDungeonScoreForEntry.mapScore
                     env.mpmapname   = bestDungeonScoreForEntry.mapName
