@@ -80,6 +80,15 @@ This keyword must not be quantified (all other keywords require a quantifier).
 | `warlock`      | boolean | if applicant is a warlock |
 | `warrior`      | boolean | if applicant is a warrior |
 
+#### Rating keywords
+| Keyword        | Type    | Description |
+|----------------|---------|-------------|
+| mprating       | integer | overall mythic+ dungeon rating |
+| mpmaprating    | integer | mythic+ rating in current dungeon |
+| mpmapmaxkey    | integer | max key done in current mythic+ dungeon |
+| mpmapintime    | boolean | current mythic+ dungeon completed successfully |
+| mpmapname      | string  | current mythic+ dungeon name |
+
 #### Provided by [Premade Regions](https://github.com/0xbs/premade-regions)
 
 | Keyword        | Type    | Description |
