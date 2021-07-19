@@ -124,6 +124,11 @@ This keyword must not be quantified (all other keywords require a quantifier).
 | `riomythickills`    | table   | a table that contains the number of kills for each boss on mythic difficulty|`riomythickills[3] > 0` means third boss killed at least once|
 | `rioraidbosscount`  | integer | number of bosses in the current raid|`rionormalkills[rioraidbosscount] > 0` means last boss in the raid killed at least once on normal|
 
+### Resources
+
+* [Project on CurseForge](https://www.curseforge.com/wow/addons/premade-applicants-filter)
+* [Project on Wago.io](https://addons.wago.io/addons/premade-applicants-filter)
+
 ### License
 
 The software is provided under the GNU General Public License, Version 3. See the `LICENSE` file for details.
