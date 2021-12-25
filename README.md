@@ -8,7 +8,7 @@ role, class, item level and other external metrics such as a Raider.IO rating.
 Premade Applicants Filter aims to help group leaders by filtering out
 applicants that do not match the required criteria.
 
-### Keywords
+## Keywords
 
 All applicants are technically an applicant group that consists of a list of
 members. Most of the time, there is only one member in this group. This means
@@ -28,7 +28,7 @@ some sort of first-order logic expression!
 | `all("ilvl >= 400 and (rio > 800 or rioprev > 800 or riomain > 800)")` | all members of the applicant group must have item level 400 or better and a Raider.IO rating of 800 this season, last season or on their main character |
 | `some("heal or deathknight") and none("hunter")` | there is at least one heal or deathknight in the group, but no hunter |
 
-#### Quantifiers
+### Quantifiers
 
 | Quantifier     | Synonyms | Description |
 |----------------|----------|-------------|
@@ -36,7 +36,7 @@ some sort of first-order logic expression!
 | `some("...")`  | `exists` | at least one member of the applicant group must fulfill the given predicate |
 | `none("...")`  |          | synonym to `not all()` |
 
-#### Global keywords
+### Global keywords
 
 This keyword must not be quantified (all other keywords require a quantifier).
 
@@ -44,12 +44,13 @@ This keyword must not be quantified (all other keywords require a quantifier).
 |----------------|---------|-------------|
 | `members`      | integer | number of members in the applicant group |
 
-#### Standard keywords
+### Standard keywords
 
 | Keyword        | Type    | Description |
 |----------------|---------|-------------|
 | `level`        | integer | applicant level |
 | `ilvl`         | integer | maximum item level |
+| `pvpilvl`      | integer | PvP item level |
 | `myilvl`       | integer | your own item level (for comparison) |
 | `hlvl`         | integer | honor level |
 | `relationship` | string  | your relationship to the applicant (friend, guild or empty) |
@@ -63,7 +64,7 @@ This keyword must not be quantified (all other keywords require a quantifier).
 | `range`        | boolean | if applicant's class can be a ranged class |
 | `melee`        | boolean | if applicant's class can be a melee class |
 
-#### Class keywords
+### Class keywords
 
 | Keyword        | Type    | Description |
 |----------------|---------|-------------|
@@ -80,7 +81,8 @@ This keyword must not be quantified (all other keywords require a quantifier).
 | `warlock`      | boolean | if applicant is a warlock |
 | `warrior`      | boolean | if applicant is a warrior |
 
-#### Rating keywords
+### Mythic Plus Rating keywords
+
 | Keyword        | Type    | Description |
 |----------------|---------|-------------|
 | `mprating`     | integer | overall mythic+ dungeon rating (0 if no rating) |
@@ -89,7 +91,32 @@ This keyword must not be quantified (all other keywords require a quantifier).
 | `mpmapintime`  | boolean | current mythic+ dungeon completed successfully (false if no rating) |
 | `mpmapname`    | string  | current mythic+ dungeon name (can be empty if no rating) |
 
-#### Provided by [Premade Regions](https://github.com/0xbs/premade-regions)
+### PvP Rating keywords
+
+| Keyword           | Type    | Description                              |
+|-------------------|---------|------------------------------------------|
+| `pvprating`       | integer | PvP rating                               |
+| `pvptier`         | integer | PvP tier enumeration (normalized values) |
+| `pvptierx`        | integer | PvP tier enumeration (internal values)   |
+| `pvptiername`     | string  | translated name of PvP tier              |
+| `pvpactivityname` | string  | name of current PvP activity             |
+
+#### PvP Tier
+The following table shows the relation between tier, tierx, tier name and rating.
+
+| `pvptiername` (English) | `pvptier`  | `pvptierx` | Rating |
+|-------------------------|------------|------------|--------|
+| Unranked                | 0          | 0          | -      |
+| Combatant I             | 1          | 1          | 1000   |
+| Combatant II            | 2          | 6          | 1200   |
+| Challenger I            | 3          | 2          | 1400   |
+| Challenger II           | 4          | 7          | 1600   |
+| Rival I                 | 5          | 3          | 1800   |
+| Rival II                | 6          | 8          | 1950   |
+| Duelist                 | 7          | 4          | 2100   |
+| Elite                   | 8          | 5          | 2400   |
+
+### Provided by [Premade Regions](https://github.com/0xbs/premade-regions)
 
 | Keyword        | Type    | Description |
 |----------------|---------|-------------|
@@ -100,7 +127,7 @@ This keyword must not be quantified (all other keywords require a quantifier).
 | `mex`          | boolean | if the data center region of the applicant is Mexico |
 | `bzl`          | boolean | if the data center region of the applicant is Brazil |
 
-#### Provided by Raider.IO
+### Provided by Raider.IO
 
 | Keyword             | Type    | Description | Example |
 |---------------------|---------|-------------|---------|
@@ -124,11 +151,11 @@ This keyword must not be quantified (all other keywords require a quantifier).
 | `riomythickills`    | table   | a table that contains the number of kills for each boss on mythic difficulty|`riomythickills[3] > 0` means third boss killed at least once|
 | `rioraidbosscount`  | integer | number of bosses in the current raid|`rionormalkills[rioraidbosscount] > 0` means last boss in the raid killed at least once on normal|
 
-### Resources
+## Resources
 
 * [Project on CurseForge](https://www.curseforge.com/wow/addons/premade-applicants-filter)
 * [Project on Wago.io](https://addons.wago.io/addons/premade-applicants-filter)
 
-### License
+## License
 
 The software is provided under the GNU General Public License, Version 3. See the `LICENSE` file for details.

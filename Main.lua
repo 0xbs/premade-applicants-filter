@@ -35,6 +35,19 @@ C.DPS_CLASS_TYPE = {
     ["WARRIOR"]     = { range = false, melee = true },
 }
 
+-- Translates tier enum values into normalized values - check via /dump PVPUtil.GetTierName(1)
+C.TIER_MAP = {
+    [0] = 0, -- Unranked
+    [1] = 1, -- Combatant I
+    [2] = 3, -- Challenger I
+    [3] = 5, -- Rival I
+    [4] = 7, -- Duelist
+    [5] = 8, -- Elite
+    [6] = 2, -- Combatant II
+    [7] = 4, -- Challenger II
+    [8] = 6, -- Rival II
+}
+
 function PAF.GetModel()
     return PremadeApplicantsFilterState
 end
@@ -60,13 +73,15 @@ function PAF.DoFilterSearchResults(applicants)
             local memberEnvs = {}
             for memberIdx = 1, applicantInfo.numMembers do
                 local name, class, localizedClass, level, itemLevel, honorLevel, tank, healer, damage,
-                assignedRole, relationship, dungeonScore = C_LFGList.GetApplicantMemberInfo(applicantID, memberIdx)
-                local bestDungeonScoreForEntry = C_LFGList.GetApplicantDungeonScoreForListing(applicantID, memberIdx, activeEntryInfo.activityID);
+                assignedRole, relationship, dungeonScore, pvpItemLevel = C_LFGList.GetApplicantMemberInfo(applicantID, memberIdx)
+                local bestDungeonScoreForEntry = C_LFGList.GetApplicantDungeonScoreForListing(applicantID, memberIdx, activeEntryInfo.activityID)
+                local pvpRatingForEntry = C_LFGList.GetApplicantPvpRatingInfoForListing(applicantID, memberIdx, activeEntryInfo.activityID)
 
                 local env = {}
                 env.level = level
                 env.ilvl = itemLevel
                 env.myilvl = select(2, GetAverageItemLevel())
+                env.pvpilvl = pvpItemLevel
                 env.hlvl = honorLevel
                 env.relationship = relationship
                 env.friend = relationship == "friend"
@@ -91,6 +106,13 @@ function PAF.DoFilterSearchResults(applicants)
                     env.mpmapname   = bestDungeonScoreForEntry.mapName
                     env.mpmapmaxkey = bestDungeonScoreForEntry.bestRunLevel
                     env.mpmapintime = bestDungeonScoreForEntry.finishedSuccess
+                end
+                if pvpRatingForEntry then
+                    env.pvpactivityname = pvpRatingForEntry.activityName
+                    env.pvprating       = pvpRatingForEntry.rating
+                    env.pvptierx        = pvpRatingForEntry.tier
+                    env.pvptier         = C.TIER_MAP[pvpRatingForEntry.tier]
+                    env.pvptiername     = PVPUtil.GetTierName(pvpRatingForEntry.tier)
                 end
                 PAF.PutRaiderIOMetrics(env, name)
                 PAF.PutPremadeRegionInfo(env, name)
