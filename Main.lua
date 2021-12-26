@@ -81,7 +81,7 @@ function PAF.DoFilterSearchResults(applicants)
                 env.level = level
                 env.ilvl = itemLevel
                 env.myilvl = select(2, GetAverageItemLevel())
-                env.pvpilvl = pvpItemLevel
+                env.pvpilvl = pvpItemLevel or 0
                 env.hlvl = honorLevel
                 env.relationship = relationship
                 env.friend = relationship == "friend"
@@ -107,6 +107,11 @@ function PAF.DoFilterSearchResults(applicants)
                     env.mpmapmaxkey = bestDungeonScoreForEntry.bestRunLevel
                     env.mpmapintime = bestDungeonScoreForEntry.finishedSuccess
                 end
+                env.pvpactivityname = ""
+                env.pvprating = 0
+                env.pvptierx = 0
+                env.pvptier = 0
+                env.pvptiername = ""
                 if pvpRatingForEntry then
                     env.pvpactivityname = pvpRatingForEntry.activityName
                     env.pvprating       = pvpRatingForEntry.rating
