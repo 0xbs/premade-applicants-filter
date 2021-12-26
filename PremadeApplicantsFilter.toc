@@ -1,6 +1,6 @@
 ## Interface: 90105
 ## Title: Premade Applicants Filter
-## Version: 1.2.0
+## Version: 1.2.1
 ## Notes: Allows filtering of premade applicants using advanced filter expressions.
 ## Author: Elotheon-Arthas-EU
 ## SavedVariables:
