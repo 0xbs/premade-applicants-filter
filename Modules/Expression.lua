@@ -20,21 +20,21 @@ local PAF = select(2, ...)
 local L = PAF.L
 local C = PAF.C
 
-StaticPopupDialogs["PAF_ERRORPOPUP"] = {
+StaticPopupDialogs["PAF_ERROR_EXPRESSION"] = {
     text = "%s",
-    button1 = L["button.ok"],
+    button1 = OKAY,
+    exclusive = 1,
+    hideOnEscape = 1,
     timeout = 0,
-    whileDead = true,
-    hideOnEscape = true,
-    preferredIndex = 3,
+    whileDead = 1,
 }
 
 function PAF.HandleSyntaxError(error)
-    StaticPopup_Show("PAF_ERRORPOPUP", string.format(L["error.syntax"], error))
+    StaticPopup_Show("PAF_ERROR_EXPRESSION", string.format(L["error.syntax"], error))
 end
 
 function PAF.HandleSemanticError(error)
-    StaticPopup_Show("PAF_ERRORPOPUP", string.format(L["error.semantic"], error))
+    StaticPopup_Show("PAF_ERROR_EXPRESSION", string.format(L["error.semantic"], error))
 end
 
 function PAF.DoesPassThroughFilter(env, exp)
