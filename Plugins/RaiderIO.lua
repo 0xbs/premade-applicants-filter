@@ -71,8 +71,8 @@ function PAF.PutRaiderIOMetrics(env, playerName)
     if playerName and RaiderIO and RaiderIO.GetProfile then
         if RaiderIO.GetProfile then
             -- new API
-            local name, realm, faction = PAF.GetNameRealmFaction(playerName)
-            local result = RaiderIO.GetProfile(name, realm, faction)
+            local name, realm = PAF.GetNameRealmFaction(playerName)
+            local result = RaiderIO.GetProfile(name, realm)
             if not result and type(result) ~= "table" then
                 return
             end
