@@ -46,8 +46,8 @@ function PAF.Dialog_OnLoad()
     dialog:SetBorder("ButtonFrameTemplateNoPortraitMinimizable") -- ButtonFrameTemplateNoPortrait exists, but is broken at the moment
     dialog:SetPortraitShown(false);
     dialog:SetTitle("Premade Applicants Filter")
-    dialog.TitleContainer:SetScript("OnMouseDown", PAF.Dialog_OnMouseDown)
-    dialog.TitleContainer:SetScript("OnMouseUp", PAF.Dialog_OnMouseUp)
+    dialog:SetScript("OnMouseDown", PAF.Dialog_OnMouseDown)
+    dialog:SetScript("OnMouseUp", PAF.Dialog_OnMouseUp)
     dialog.Explanation:SetText(L["dialog.explanation"])
     dialog.InfoButton:EnableMouse(true)
     dialog.InfoButton:SetScript("OnEnter", PAF.Dialog_InfoButton_OnEnter)
@@ -70,7 +70,7 @@ end
 function PAF.Dialog_ResetPosition()
     local dialog = PremadeApplicantsFilterDialog
     dialog:ClearAllPoints()
-    dialog:SetPoint("TOPLEFT", GroupFinderFrame, "TOPRIGHT")
+    dialog:SetPoint("TOPLEFT", PVEFrame, "TOPRIGHT")
     dialog:SetWidth(300)
 end
 

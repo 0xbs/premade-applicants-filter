@@ -2,9 +2,9 @@
 ..\FrameXML\UI.xsd">
 
     <Button name="PremadeApplicantsFilterInfoButtonTemplate" virtual="true">
-        <Size x="64" y="64"/>
+        <Size x="46" y="46"/>
         <HitRectInsets>
-            <AbsInset left="20" right="20" top="20" bottom="20"/>
+            <AbsInset left="10" right="10" top="10" bottom="10"/>
         </HitRectInsets>
         <Layers>
             <Layer level="BACKGROUND">
@@ -18,7 +18,7 @@
         </Layers>
     </Button>
 
-    <Frame name="PremadeApplicantsFilterDialog" frameStrata="FULLSCREEN" parent="PVEFrame" movable="true" clampedToScreen="true" enableMouse="true" inherits="PortraitFrameTemplate" hidden="true">
+    <Frame name="PremadeApplicantsFilterDialog" parent="PVEFrame" inherits="PortraitFrameTemplate" frameStrata="FULLSCREEN" movable="true" clampedToScreen="true" enableMouse="true" hidden="true">
         <Size x="300" y="200"/>
         <Anchors>
             <Anchor point="TOPLEFT" relativePoint="TOPRIGHT"/>
@@ -27,11 +27,11 @@
             <Layer>
                 <!-- text explaining the advanced expression filter -->
                 <FontString parentKey="Explanation" inherits="GameFontNormal"  justifyH="LEFT">
-                    <Size y="50"/>
+                    <Size y="45"/>
                     <Anchors>
                         <Anchor point="LEFT" x="10"/>
                         <Anchor point="RIGHT" x="-35"/>
-                        <Anchor point="TOP" y="-17"/>
+                        <Anchor point="TOP" y="-20"/>
                     </Anchors>
                 </FontString>
             </Layer>
@@ -39,8 +39,8 @@
         <Frames>
             <Button parentKey="InfoButton" inherits="PremadeApplicantsFilterInfoButtonTemplate">
                 <Anchors>
-                    <Anchor point="RIGHT" x="8"/>
-                    <Anchor point="TOP" y="-10"/>
+                    <Anchor point="RIGHT" x="0"/>
+                    <Anchor point="TOP" y="-20"/>
                 </Anchors>
             </Button>
             <ScrollFrame parentKey="Expression" inherits="InputScrollFrameTemplate">
@@ -63,8 +63,6 @@
         <Scripts>
             <OnLoad>PremadeApplicantsFilter.Dialog_OnLoad(self)</OnLoad>
             <OnShow>PremadeApplicantsFilter.Dialog_OnShow(self)</OnShow>
-            <OnMouseDown>PremadeApplicantsFilter.Dialog_OnMouseDown(self,button)</OnMouseDown>
-            <OnMouseUp>PremadeApplicantsFilter.Dialog_OnMouseUp(self,button)</OnMouseUp>
         </Scripts>
     </Frame>
 </Ui>
