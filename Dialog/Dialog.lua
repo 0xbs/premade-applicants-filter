@@ -53,9 +53,9 @@ function PAF.Dialog_OnLoad()
 
     PAF.Dialog_SetUpUsePAFCheckbox()
 
-    local font = dialog.Title:GetFont()
-    dialog.Expression.EditBox:SetFont(font, C.FONTSIZE_TEXTBOX)
-    dialog.Expression.EditBox.Instructions:SetFont(font, C.FONTSIZE_TEXTBOX)
+    local fontFile, _, fontFlags = dialog.Title:GetFont()
+    dialog.Expression.EditBox:SetFont(fontFile, C.FONTSIZE_TEXTBOX, fontFlags)
+    dialog.Expression.EditBox.Instructions:SetFont(fontFile, C.FONTSIZE_TEXTBOX, fontFlags)
     --dialog.Expression.EditBox:SetScript("OnTextChanged", PAF.Dialog_Expression_OnTextChanged) -- overrides Blizz
 
     dialog:ClearAllPoints()
