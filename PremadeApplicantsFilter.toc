@@ -2,6 +2,7 @@
 ## Title: Premade Applicants Filter
 ## Version: 2.0.0
 ## Notes: Allows filtering of premade applicants using advanced filter expressions.
+## Notes-ruRU: Позволяет фильтровать заранее собранных кандидатов с помощью расширенных выражений фильтра.
 ## Author: Elotheon-Arthas-EU
 ## SavedVariables:
 ## SavedVariablesPerCharacter: PremadeApplicantsFilterState
