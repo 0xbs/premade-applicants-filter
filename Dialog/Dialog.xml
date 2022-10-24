@@ -18,22 +18,12 @@
         </Layers>
     </Button>
 
-    <Frame name="PremadeApplicantsFilterDialog" frameStrata="FULLSCREEN" parent="PVEFrame" movable="true" clampedToScreen="true" enableMouse="true" inherits="BasicFrameTemplateWithInset" hidden="true">
+    <Frame name="PremadeApplicantsFilterDialog" frameStrata="FULLSCREEN" parent="PVEFrame" movable="true" clampedToScreen="true" enableMouse="true" inherits="PortraitFrameTemplate" hidden="true">
         <Size x="300" y="200"/>
         <Anchors>
-            <Anchor point="TOPLEFT"/>
+            <Anchor point="TOPLEFT" relativePoint="TOPRIGHT"/>
         </Anchors>
         <Layers>
-            <Layer level="OVERLAY">
-                <!-- the text in the title bar -->
-                <FontString parentKey="Title" inherits="GameFontNormal" wordwrap="false">
-                    <Anchors>
-                        <Anchor point="LEFT" x="10"/>
-                        <Anchor point="RIGHT" x="-10"/>
-                        <Anchor point="TOP" y="-5"/>
-                    </Anchors>
-                </FontString>
-            </Layer>
             <Layer>
                 <!-- text explaining the advanced expression filter -->
                 <FontString parentKey="Explanation" inherits="GameFontNormal"  justifyH="LEFT">

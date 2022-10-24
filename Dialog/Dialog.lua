@@ -43,9 +43,11 @@ end
 function PAF.Dialog_OnLoad()
     local dialog = PremadeApplicantsFilterDialog -- keep that
 
-    dialog.InsetBg:SetPoint("TOPLEFT", 4, -60)
-    dialog.InsetBg:SetPoint("BOTTOMRIGHT", -6, 6)
-    dialog.Title:SetText("Premade Applicants Filter")
+    dialog:SetBorder("ButtonFrameTemplateNoPortraitMinimizable") -- ButtonFrameTemplateNoPortrait exists, but is broken at the moment
+    dialog:SetPortraitShown(false);
+    dialog:SetTitle("Premade Applicants Filter")
+    dialog.TitleContainer:SetScript("OnMouseDown", PAF.Dialog_OnMouseDown)
+    dialog.TitleContainer:SetScript("OnMouseUp", PAF.Dialog_OnMouseUp)
     dialog.Explanation:SetText(L["dialog.explanation"])
     dialog.InfoButton:EnableMouse(true)
     dialog.InfoButton:SetScript("OnEnter", PAF.Dialog_InfoButton_OnEnter)
@@ -53,14 +55,10 @@ function PAF.Dialog_OnLoad()
 
     PAF.Dialog_SetUpUsePAFCheckbox()
 
-    local fontFile, _, fontFlags = dialog.Title:GetFont()
+    local fontFile, _, fontFlags = dialog.Expression.EditBox:GetFont()
     dialog.Expression.EditBox:SetFont(fontFile, C.FONTSIZE_TEXTBOX, fontFlags)
     dialog.Expression.EditBox.Instructions:SetFont(fontFile, C.FONTSIZE_TEXTBOX, fontFlags)
     --dialog.Expression.EditBox:SetScript("OnTextChanged", PAF.Dialog_Expression_OnTextChanged) -- overrides Blizz
-
-    dialog:ClearAllPoints()
-    dialog:SetPoint("TOPLEFT", GroupFinderFrame, "TOPRIGHT")
-    dialog:SetWidth(300)
 end
 
 function PAF.Dialog_OnShow()
@@ -69,18 +67,26 @@ function PAF.Dialog_OnShow()
     PremadeApplicantsFilterDialog.Expression.EditBox:SetText(model.expression)
 end
 
-function PAF.Dialog_OnMouseDown()
+function PAF.Dialog_ResetPosition()
+    local dialog = PremadeApplicantsFilterDialog
+    dialog:ClearAllPoints()
+    dialog:SetPoint("TOPLEFT", GroupFinderFrame, "TOPRIGHT")
+    dialog:SetWidth(300)
+end
+
+function PAF.Dialog_OnMouseDown(self, button)
     PremadeApplicantsFilterDialog:StartMoving()
 end
 
-function PAF.Dialog_OnMouseUp()
+function PAF.Dialog_OnMouseUp(self, button)
     PremadeApplicantsFilterDialog:StopMovingOrSizing()
+    if button == "RightButton" then
+        PAF.Dialog_ResetPosition()
+    end
 end
 
 PremadeApplicantsFilter.Dialog_OnLoad = PAF.Dialog_OnLoad
 PremadeApplicantsFilter.Dialog_OnShow = PAF.Dialog_OnShow
-PremadeApplicantsFilter.Dialog_OnMouseDown = PAF.Dialog_OnMouseDown
-PremadeApplicantsFilter.Dialog_OnMouseUp = PAF.Dialog_OnMouseUp
 
 function PAF.Dialog_ClearFocus()
     local dialog = PremadeApplicantsFilterDialog
