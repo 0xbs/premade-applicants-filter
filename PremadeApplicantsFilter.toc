@@ -1,7 +1,14 @@
 ## Interface: 100000
 ## Title: Premade Applicants Filter
 ## Version: 2.0.0
-## Notes: Allows filtering of premade applicants using advanced filter expressions.
+## Notes: Allows filtering of premade group applicants using advanced filter expressions.
+## Notes-deDE: Ermöglicht das Filtern von Anwärten auf organisierten Gruppen mithilfe erweiterter Filterausdrücke.
+## Notes-frFR: Permet de filtrer les candidats de groupe prédéfinis à l'aide d'expressions de filtre avancées.
+## Notes-esES: Permite el filtrado de solicitantes de grupos prefabricados utilizando expresiones de filtro avanzadas.
+## Notes-ruRU: Позволяет фильтровать заранее собранных кандидатов с помощью расширенных выражений фильтра.
+## Notes-koKR: 고급 필터 표현식을 사용하여 미리 만들어진 그룹 지원자를 필터링할 수 있습니다.
+## Notes-zhCN: 允许使用高级过滤器表达式过滤预制组申请人。
+## Notes-zhTW: 允許使用高級過濾器表達式過濾預製組申請人。
 ## Author: Elotheon-Arthas-EU
 ## SavedVariables:
 ## SavedVariablesPerCharacter: PremadeApplicantsFilterState
