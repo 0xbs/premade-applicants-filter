@@ -163,6 +163,12 @@ The software is provided under the GNU General Public License, Version 3. See th
 
 ## Changelog
 
+### Version 2.0.2
+* Bumped TOC
+
+### Version 2.0.1
+* Updated translations
+
 ### Version 2.0.0
 * Update for Dragonflight
 * Use Dragonflight interface style
