@@ -1,6 +1,6 @@
-## Interface: 100002
+## Interface: 100005
 ## Title: Premade Applicants Filter
-## Version: 2.0.2
+## Version: @project-version@
 ## Notes: Allows filtering of premade group applicants using advanced filter expressions.
 ## Notes-deDE: Ermöglicht das Filtern von Anwärten auf organisierten Gruppen mithilfe erweiterter Filterausdrücke.
 ## Notes-frFR: Permet de filtrer les candidats de groupe prédéfinis à l'aide d'expressions de filtre avancées.
