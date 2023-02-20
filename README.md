@@ -63,6 +63,12 @@ This keyword must not be quantified (all other keywords require a quantifier).
 | `dps`          | boolean | synonym for `damage`                                        |
 | `range`        | boolean | if applicant's class can be a ranged class                  |
 | `melee`        | boolean | if applicant's class can be a melee class                   |
+| `plate`        | boolean | if applicant's class wears plate armor                      | 
+| `mail`         | boolean | if applicant's class wears mail armor                       | 
+| `leather`      | boolean | if applicant's class wears leather armor                    | 
+| `cloth`        | boolean | if applicant's class wears cloth armor                      | 
+| `hasbr`        | boolean | if applicant provides a battle rezz                         | 
+| `hasbl`        | boolean | if applicant provides bloodlust/heroism                     | 
 
 ### Class keywords
 

@@ -97,10 +97,12 @@ function PAF.DoFilterSearchResults(applicants)
                 for someClass, _ in pairs(C.DPS_CLASS_TYPE) do
                     env[someClass:lower()] = someClass == class:upper()
                 end
+                env.plate = C.DPS_CLASS_TYPE[class].armor == "plate"
+                env.mail = C.DPS_CLASS_TYPE[class].armor == "mail"
+                env.leather = C.DPS_CLASS_TYPE[class].armor == "leather"
+                env.cloth = C.DPS_CLASS_TYPE[class].armor == "cloth"
                 env.hasbr = env.druids > 0 or env.paladins > 0 or env.warlocks > 0 or env.deathknights > 0
-                env.haslust = env.shamans > 0 or env.evokers > 0 or env.hunters > 0 or env.mages > 0
-                env.hashero = env.haslust
-                env.hasbl = env.haslust
+                env.hasbl = env.shamans > 0 or env.evokers > 0 or env.hunters > 0 or env.mages > 0
                 env.mprating = dungeonScore or 0
                 env.mpmaprating = 0
                 env.mpmapname   = ""
