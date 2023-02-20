@@ -101,8 +101,8 @@ function PAF.DoFilterSearchResults(applicants)
                 env.mail = C.DPS_CLASS_TYPE[class].armor == "mail"
                 env.leather = C.DPS_CLASS_TYPE[class].armor == "leather"
                 env.cloth = C.DPS_CLASS_TYPE[class].armor == "cloth"
-                env.hasbr = env.druids > 0 or env.paladins > 0 or env.warlocks > 0 or env.deathknights > 0
-                env.hasbl = env.shamans > 0 or env.evokers > 0 or env.hunters > 0 or env.mages > 0
+                env.hasbr = env.druid or env.paladin or env.warlock or env.deathknight
+                env.hasbl = env.shaman or env.evoker or env.hunter or env.mage
                 env.mprating = dungeonScore or 0
                 env.mpmaprating = 0
                 env.mpmapname   = ""
