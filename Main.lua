@@ -95,12 +95,12 @@ function PAF.DoFilterSearchResults(applicants)
                 env.range = C.DPS_CLASS_TYPE[class:upper()].range
                 env.melee = C.DPS_CLASS_TYPE[class:upper()].melee
                 for someClass, _ in pairs(C.DPS_CLASS_TYPE) do
-                    env[someClass:lower()] = someClass == class:upper()
+                    env[someClass:lower()] = class:upper() == someClass
                 end
-                env.plate = C.DPS_CLASS_TYPE[class].armor == "plate"
-                env.mail = C.DPS_CLASS_TYPE[class].armor == "mail"
-                env.leather = C.DPS_CLASS_TYPE[class].armor == "leather"
-                env.cloth = C.DPS_CLASS_TYPE[class].armor == "cloth"
+                env.plate = C.DPS_CLASS_TYPE[class:upper()].armor == "plate"
+                env.mail = C.DPS_CLASS_TYPE[class:upper()].armor == "mail"
+                env.leather = C.DPS_CLASS_TYPE[class:upper()].armor == "leather"
+                env.cloth = C.DPS_CLASS_TYPE[class:upper()].armor == "cloth"
                 env.hasbr = env.druid or env.paladin or env.warlock or env.deathknight
                 env.hasbl = env.shaman or env.evoker or env.hunter or env.mage
                 env.mprating = dungeonScore or 0
