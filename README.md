@@ -169,6 +169,16 @@ The software is provided under the GNU General Public License, Version 3. See th
 
 ## Changelog
 
+### Version 2.1.3
+* Bumped TOC
+
+### Version 2.1.2
+* Add support for evokers
+* Add keywords `plate`, `mail`, `leather` and `cloth` for armor types
+* Add keyword `hasbr` checking for battle rezz
+* Add keywords `hasbl` checking for Bloodlust/Heroism
+* Fix errors
+
 ### Version 2.0.2
 * Bumped TOC
 
