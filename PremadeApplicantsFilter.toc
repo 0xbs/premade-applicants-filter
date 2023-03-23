@@ -1,4 +1,4 @@
-## Interface: 100005
+## Interface: 100007
 ## Title: Premade Applicants Filter
 ## Version: @project-version@
 ## Notes: Allows filtering of premade group applicants using advanced filter expressions.
