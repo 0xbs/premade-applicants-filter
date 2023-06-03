@@ -150,9 +150,9 @@ function PAF.DoFilterSearchResults(applicants)
                 end
                 return total
             end
-            applicantEnv.every = function (subexp) return env.all(subexp) end
-            applicantEnv.exists = function (subexp) return env.some(subexp) end
-            applicantEnv.none = function (subexp) return not env.some(subexp) end
+            applicantEnv.every = function (subexp) return applicantEnv.all(subexp) end
+            applicantEnv.exists = function (subexp) return applicantEnv.some(subexp) end
+            applicantEnv.none = function (subexp) return not applicantEnv.some(subexp) end
             if not PAF.DoesPassThroughFilter(applicantEnv, exp) then
                 table.remove(applicants, idx)
             end

@@ -34,7 +34,7 @@ some sort of first-order logic expression!
 |---------------|----------|-----------------------------------------------------------------------------|
 | `all("...")`  | `every`  | all members of the applicant group must fulfill the given predicate         |
 | `some("...")` | `exists` | at least one member of the applicant group must fulfill the given predicate |
-| `none("...")` |          | synonym to `not all()`                                                      |
+| `none("...")` |          | synonym to `not some()`                                                     |
 
 ### Global keywords
 
