@@ -169,6 +169,11 @@ The software is provided under the GNU General Public License, Version 3. See th
 
 ## Changelog
 
+### Version 2.2.*
+* Fix error message on rio*kills
+* Bumped TOC for 10.1.7
+* Fix bug causing micro button to not deselect in some situations
+
 ### Version 2.1.3
 * Bumped TOC
 
