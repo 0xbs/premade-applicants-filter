@@ -206,3 +206,4 @@ The software is provided under the GNU General Public License, Version 3. See th
 
 ### Version 1.1.1
 * Added member keywords mprating (overall dungeon rating), mpmaprating (rating of the current map/dungeon), mpmapmaxkey (highest key done in current dungeon) and mpmapintime (current dungeon was completed successfully)
+
