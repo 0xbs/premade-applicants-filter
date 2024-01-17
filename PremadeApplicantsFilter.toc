@@ -1,4 +1,4 @@
-## Interface: 100200
+## Interface: 100205
 ## Title: Premade Applicants Filter
 ## Version: @project-version@
 ## IconTexture: 252175
