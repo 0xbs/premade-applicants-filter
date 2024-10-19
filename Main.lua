@@ -53,6 +53,55 @@ function PAF.GetModel()
     return PremadeApplicantsFilterState
 end
 
+function PAF.GetAverageMpRating(applicantID, applicantInfo, activeEntryActivityID)
+    local ratingSum = 0
+    for memberIdx = 1, applicantInfo.numMembers do
+        local dungeonScore = select(12, C_LFGList.GetApplicantMemberInfo(applicantID, memberIdx))
+        ratingSum = ratingSum + (dungeonScore or 0)
+    end
+    return ratingSum / applicantInfo.numMembers
+end
+
+function PAF.GetAveragePvpRating(applicantID, applicantInfo, activeEntryActivityID)
+    local ratingSum = 0
+    for memberIdx = 1, applicantInfo.numMembers do
+        local pvpRatingForEntry = C_LFGList.GetApplicantPvpRatingInfoForListing(applicantID, memberIdx, activeEntryActivityID)
+        ratingSum = ratingSum + (pvpRatingForEntry and pvpRatingForEntry.rating or 0)
+    end
+    return ratingSum / applicantInfo.numMembers
+end
+
+function PAF.GetSortingFunc(activityID, activityInfo)
+    return function(applicantID1, applicantID2)
+        local applicantInfo1 = C_LFGList.GetApplicantInfo(applicantID1)
+        local applicantInfo2 = C_LFGList.GetApplicantInfo(applicantID2)
+
+        -- sort by status first
+        if applicantInfo1.applicationStatus ~= applicantInfo2.applicationStatus then
+            return applicantInfo1.applicationStatus < applicantInfo2.applicationStatus
+        end
+
+        -- sort by rating if rated activity
+        if activityInfo.isMythicPlusActivity then
+            local rating1 = PAF.GetAverageMpRating(applicantID1, applicantInfo1, activityID)
+            local rating2 = PAF.GetAverageMpRating(applicantID2, applicantInfo2, activityID)
+            return rating1 > rating2
+        elseif activityInfo.isRatedPvpActivity then
+            local rating1 = PAF.GetAveragePvpRating(applicantID1, applicantInfo1, activityID)
+            local rating2 = PAF.GetAveragePvpRating(applicantID2, applicantInfo2, activityID)
+            return rating1 > rating2
+        end
+
+        -- sort new items to the bottom
+        if applicantInfo1.isNew ~= applicantInfo2.isNew then
+            return applicantInfo2.isNew
+        end
+
+        -- sort by display order
+        return applicantInfo1.displayOrderID < applicantInfo2.displayOrderID
+    end
+end
+
 function PAF.DoFilterSearchResults(applicants)
     local model = PAF.GetModel()
     local exp = model.expression
@@ -61,8 +110,10 @@ function PAF.DoFilterSearchResults(applicants)
     exp = PAF.TrimWhitespace(exp)
     if not exp or exp == "" then return false end -- skip trivial expression
 
-    local activeEntryInfo = C_LFGList.GetActiveEntryInfo();
+    local activeEntryInfo = C_LFGList.GetActiveEntryInfo()
     if not activeEntryInfo then return end
+    local activityID = activeEntryInfo.activityID
+    local activityInfo = C_LFGList.GetActivityInfoTable(activityID)
 
     for idx = #applicants, 1, -1 do
         local applicantID = applicants[idx]
@@ -75,8 +126,8 @@ function PAF.DoFilterSearchResults(applicants)
             for memberIdx = 1, applicantInfo.numMembers do
                 local name, class, localizedClass, level, itemLevel, honorLevel, tank, healer, damage,
                 assignedRole, relationship, dungeonScore, pvpItemLevel = C_LFGList.GetApplicantMemberInfo(applicantID, memberIdx)
-                local bestDungeonScoreForEntry = C_LFGList.GetApplicantDungeonScoreForListing(applicantID, memberIdx, activeEntryInfo.activityID)
-                local pvpRatingForEntry = C_LFGList.GetApplicantPvpRatingInfoForListing(applicantID, memberIdx, activeEntryInfo.activityID)
+                local bestDungeonScoreForEntry = C_LFGList.GetApplicantDungeonScoreForListing(applicantID, memberIdx, activityID)
+                local pvpRatingForEntry = C_LFGList.GetApplicantPvpRatingInfoForListing(applicantID, memberIdx, activityID)
 
                 local env = {}
                 env.level = level
@@ -159,6 +210,8 @@ function PAF.DoFilterSearchResults(applicants)
 
         end
     end
+
+    table.sort(applicants, PAF.GetSortingFunc(activityID, activityInfo))
 end
 
 hooksecurefunc("LFGListUtil_SortApplicants", PAF.DoFilterSearchResults)
