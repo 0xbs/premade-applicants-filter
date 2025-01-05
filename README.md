@@ -169,6 +169,11 @@ The software is provided under the GNU General Public License, Version 3. See th
 
 ## Changelog
 
+### Version 2.3.*
+* Updated rio keywords
+* Fixed error caused by wrong usage of applicantInfo
+* Bumped TOC
+
 ### Version 2.2.*
 * Fix error message on rio*kills
 * Bumped TOC for 10.1.7
