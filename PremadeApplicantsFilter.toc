@@ -38,6 +38,7 @@ Localization\ruRU.lua
 Localization\esES.lua
 Modules\Util.lua
 Modules\Expression.lua
+Modules\Specializations.lua
 Plugins\PremadeRegions.lua
 Plugins\RaiderIO.lua
 Main.lua

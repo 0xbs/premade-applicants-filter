@@ -23,9 +23,36 @@ PremadeApplicantsFilterState = PremadeApplicantsFilterState or {
     expression = ""
 }
 
+local PAFAddonName = select(1, ...)
 local PAF = select(2, ...)
 
 PremadeApplicantsFilter.Debug = PAF
 
 PAF.L = {}
 PAF.C = {}
+
+C.ROLE_PREFIX = {
+    ["DAMAGER"] = "dps",
+    ["HEALER"] = "heal",
+    ["TANK"] = "tank",
+}
+
+C.ROLE_SUFFIX = {
+    ["DAMAGER"] = "dps",
+    ["HEALER"] = "heals",
+    ["TANK"] = "tanks",
+}
+
+function PAF.OnAddonLoaded(name)
+    if name == PAFAddonName then
+        PAF.InitSpecializations()
+    end
+end
+
+function PAF.OnEvent(self, event, ...)
+    if event == "ADDON_LOADED" then PAF.OnAddonLoaded(...) end
+end
+
+local frame = CreateFrame("Frame", "PremadeApplicantsFilterEventFrame")
+frame:RegisterEvent("ADDON_LOADED")
+frame:SetScript("OnEvent", PAF.OnEvent)

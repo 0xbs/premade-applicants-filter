@@ -73,12 +73,21 @@ function PAF.DoFilterSearchResults(applicants)
 
             local memberEnvs = {}
             for memberIdx = 1, applicantInfo.numMembers do
-                local name, class, localizedClass, level, itemLevel, honorLevel, tank, healer, damage,
-                assignedRole, relationship, dungeonScore, pvpItemLevel = C_LFGList.GetApplicantMemberInfo(applicantID, memberIdx)
+                local name, class, classLocalized, level, itemLevel, honorLevel, tank, healer, damage,
+                assignedRole, relationship, dungeonScore, pvpItemLevel, factionGroup, raceID, specID, isLeaver = C_LFGList.GetApplicantMemberInfo(applicantID, memberIdx)
                 local bestDungeonScoreForEntry = C_LFGList.GetApplicantDungeonScoreForListing(applicantID, memberIdx, activeEntryInfo.activityIDs[1])
                 local pvpRatingForEntry = C_LFGList.GetApplicantPvpRatingInfoForListing(applicantID, memberIdx, activeEntryInfo.activityIDs[1])
+                local specs = PAF.GetAllSpecializations()
+                local specInfo = specs[specID]
 
                 local env = {}
+                for _, loopSpecInfo in pairs(specs) do
+                    env[loopSpecInfo.specKeyword] = false
+                    env[loopSpecInfo.classKeyword] = false
+                    env[loopSpecInfo.roleClassKeyword] = false
+                    env[loopSpecInfo.classRoleKeyword] = false
+                    env[loopSpecInfo.armor] = false
+                end
                 env.level = level
                 env.ilvl = itemLevel
                 env.myilvl = select(2, GetAverageItemLevel())
@@ -87,6 +96,9 @@ function PAF.DoFilterSearchResults(applicants)
                 env.relationship = relationship
                 env.friend = relationship == "friend"
                 env.guild = relationship == "guild"
+                env.isleaver = isLeaver
+                env.horde = factionGroup == 0
+                env.alliance = factionGroup == 1
                 env.tank = tank
                 env.healer = healer
                 env.heal = healer
@@ -94,6 +106,15 @@ function PAF.DoFilterSearchResults(applicants)
                 env.dps = damage
                 env.range = C.DPS_CLASS_TYPE[class:upper()].range
                 env.melee = C.DPS_CLASS_TYPE[class:upper()].melee
+                if specInfo ~= nil then
+                    env.range = specInfo.range
+                    env.melee = specInfo.melee
+                    env[specInfo.specKeyword] = true
+                    env[specInfo.classKeyword] = true
+                    env[specInfo.roleClassKeyword] = true
+                    env[specInfo.classRoleKeyword] = true
+                    env[specInfo.armor] = true
+                end
                 for someClass, _ in pairs(C.DPS_CLASS_TYPE) do
                     env[someClass:lower()] = class:upper() == someClass
                 end
