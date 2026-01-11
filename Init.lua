@@ -31,6 +31,9 @@ PremadeApplicantsFilter.Debug = PAF
 PAF.L = {}
 PAF.C = {}
 
+local L = PAF.L
+local C = PAF.C
+
 C.ROLE_PREFIX = {
     ["DAMAGER"] = "dps",
     ["HEALER"] = "heal",
