@@ -56,6 +56,9 @@ This keyword must not be quantified (all other keywords require a quantifier).
 | `relationship` | string  | your relationship to the applicant (friend, guild or empty) |
 | `friend`       | boolean | if applicant is in your friend list                         |
 | `guild`        | boolean | if applicant is in your guild                               |
+| `isleaver`     | boolean | if applicant is often leaving groups                        |
+| `horde`        | boolean | if applicant is a Horde player                              |
+| `alliance`     | boolean | if applicant is an Alliance player                          |
 | `tank`         | boolean | if applicant would like to play tank                        |
 | `healer`       | boolean | if applicant would like to play heal                        |
 | `heal`         | boolean | synonym for `healer`                                        |
@@ -86,6 +89,61 @@ This keyword must not be quantified (all other keywords require a quantifier).
 | `shaman`      | boolean | if applicant is a shaman      |
 | `warlock`     | boolean | if applicant is a warlock     |
 | `warrior`     | boolean | if applicant is a warrior     |
+
+## Class Roles
+
+| Keyword                                  | Type    | Description                                                                                          | Example                  |
+|------------------------------------------|---------|------------------------------------------------------------------------------------------------------|--------------------------|
+| `paladin_dps`, `dps_paladins`            | integer | Current number of paladins with damage dealer role in the group. Also works for all other classes.   | `dps_paladins == 0`      |
+| `paladin_heals`, `heal_paladins`         | integer | Current number of paladins with healer role in the group. Also works for all other classes.          | `paladin_heals == 0`     |
+| `paladin_tanks`, `tank_paladins`         | integer | Current number of paladins with protection role in the group. Also works for all other classes.      | `paladin_tanks == 0`     |
+| `deathknight_tanks`, `tank_deathknights` | integer | Current number of death knights with protection role in the group. Also works for all other classes. | `deathknight_tanks <= 2` |
+| `<class>_<role>s`, `<role>_<class>s`     | integer | Current number of <class> with <role> role in the group.                                             |                          |
+
+## Specialization
+
+| Keyword                  | Type    | Description                                    |
+|--------------------------|---------|------------------------------------------------|
+| `blood_deathknights`     | integer | Number of Blood Deathknights in the group.     |
+| `frost_deathknights`     | integer | Number of Frost Deathknights in the group.     |
+| `unholy_deathknights`    | integer | Number of Unholy Deathknights in the group.    |
+| `havoc_demonhunters`     | integer | Number of Havoc Demonhunters in the group.     |
+| `vengeance_demonhunters` | integer | Number of Vengeance Demonhunters in the group. |
+| `devourer_demonhunters`  | integer | Number of Devourer Demonhunters in the group.  |
+| `balance_druids`         | integer | Number of Balance Druids in the group.         |
+| `feral_druids`           | integer | Number of Feral Druids in the group.           |
+| `guardian_druids`        | integer | Number of Guardian Druids in the group.        |
+| `restoration_druids`     | integer | Number of Restoration Druids in the group.     |
+| `devastation_evokers`    | integer | Number of Devastation Evokers in the group.    |
+| `preservation_evokers`   | integer | Number of Preservation Evokers in the group.   |
+| `augmentation_evokers`   | integer | Number of Augmentation Evokers in the group.   |
+| `beastmastery_hunters`   | integer | Number of Beastmastery Hunters in the group.   |
+| `marksmanship_hunters`   | integer | Number of Marksmanship Hunters in the group.   |
+| `survival_hunters`       | integer | Number of Survival Hunters in the group.       |
+| `holy_paladins`          | integer | Number of Holy Paladins in the group.          |
+| `protection_paladins`    | integer | Number of Protection Paladins in the group.    |
+| `retribution_paladins`   | integer | Number of Retribution Paladins in the group.   |
+| `discipline_priests`     | integer | Number of Discipline Priests in the group.     |
+| `holy_priests`           | integer | Number of Holy Priests in the group.           |
+| `shadow_priests`         | integer | Number of Shadow Priests in the group.         |
+| `arcane_mages`           | integer | Number of Arcane Mages in the group.           |
+| `fire_mages`             | integer | Number of Fire Mages in the group.             |
+| `frost_mages`            | integer | Number of Frost Mages in the group.            |
+| `brewmaster_monks`       | integer | Number of Brewmaster Monks in the group.       |
+| `windwalker_monks`       | integer | Number of Windwalker Monks in the group.       |
+| `mistweaver_monks`       | integer | Number of Mistweaver Monks in the group.       |
+| `assassination_rogues`   | integer | Number of Assassination Rogues in the group.   |
+| `outlaw_rogues`          | integer | Number of Outlaw Rogues in the group.          |
+| `subtlety_rogues`        | integer | Number of Subtlety Rogues in the group.        |
+| `elemental_shamans`      | integer | Number of Elemental Shamans in the group.      |
+| `enhancement_shamans`    | integer | Number of Enhancement Shamans in the group.    |
+| `restoration_shamans`    | integer | Number of Restoration Shamans in the group.    |
+| `affliction_warlocks`    | integer | Number of Affliction Warlocks in the group.    |
+| `demonology_warlocks`    | integer | Number of Demonology Warlocks in the group.    |
+| `destruction_warlocks`   | integer | Number of Destruction Warlocks in the group.   |
+| `arms_warriors`          | integer | Number of Arms Warriors in the group.          |
+| `fury_warriors`          | integer | Number of Fury Warriors in the group.          |
+| `protection_warriors`    | integer | Number of Protection Warriors in the group.    |
 
 ### Mythic Plus Rating keywords
 
@@ -168,6 +226,10 @@ The software is provided under the GNU General Public License, Version 3. See th
 
 
 ## Changelog
+
+### Version 3.0.*
+* Support for Midnight
+* Add specialization and role_class keywords
 
 ### Version 2.3.*
 * Updated rio keywords
