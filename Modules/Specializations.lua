@@ -83,23 +83,25 @@ local specs = {}
 function PAF.InitSpecializations()
     for specID, specInfo in pairs(C.SPECIALIZATIONS) do
         local id, specLocalized, description, icon, role, class, classLocalized = GetSpecializationInfoByID(specID)
-        specs[specID] = {
-            specID = specID,
-            class = class, -- should be the same as specInfo.class
-            classLocalized = classLocalized,
-            classKeyword = string.format("%ss", class:lower()), -- "warriors"
-            spec = specInfo.spec,
-            specLocalized = specLocalized,
-            specKeyword = string.format("%s_%ss", specInfo.spec:lower(), class:lower()), -- "arms_warriors"
-            specIcon = icon,
-            role = role,
-            roleClassKeyword = string.format("%s_%ss", C.ROLE_PREFIX[role], class:lower()), -- "tank_warriors"
-            classRoleKeyword = string.format("%s_%s", class:lower(), C.ROLE_SUFFIX[role]), -- "warrior_tanks"
-            armor = C.DPS_CLASS_TYPE[class].armor,
-            range = specInfo.range or false,
-            melee = specInfo.melee or false,
-            classColor = RAID_CLASS_COLORS[class] or NORMAL_FONT_COLOR,
-        }
+        if id then
+            specs[specID] = {
+                specID = specID,
+                class = class, -- should be the same as specInfo.class
+                classLocalized = classLocalized,
+                classKeyword = string.format("%ss", class:lower()), -- "warriors"
+                spec = specInfo.spec,
+                specLocalized = specLocalized,
+                specKeyword = string.format("%s_%ss", specInfo.spec:lower(), class:lower()), -- "arms_warriors"
+                specIcon = icon,
+                role = role,
+                roleClassKeyword = string.format("%s_%ss", C.ROLE_PREFIX[role], class:lower()), -- "tank_warriors"
+                classRoleKeyword = string.format("%s_%s", class:lower(), C.ROLE_SUFFIX[role]), -- "warrior_tanks"
+                armor = C.DPS_CLASS_TYPE[class].armor,
+                range = specInfo.range or false,
+                melee = specInfo.melee or false,
+                classColor = RAID_CLASS_COLORS[class] or NORMAL_FONT_COLOR,
+            }
+        end
     end
 end
 
