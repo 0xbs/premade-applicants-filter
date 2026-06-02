@@ -21,8 +21,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Clone
-        uses: actions/checkout@v1  # note: checkout@v2 breaks git history, so generating a changelog and
-                                   # file naming for non-tagged builds will not work properly
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0  # gets git history for changelogs
 
       - name: BigWigs Packager
         uses: BigWigsMods/packager@v2
